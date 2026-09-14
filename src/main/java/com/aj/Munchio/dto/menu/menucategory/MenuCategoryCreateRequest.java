@@ -2,12 +2,14 @@ package com.aj.Munchio.dto.menu.menucategory;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
 public class MenuCategoryCreateRequest {
     @NotBlank
     @NotNull
+    @Size(max = 25)
     private String name;
 
     @NotNull

@@ -1,21 +1,33 @@
 package com.aj.Munchio.dto.menu.menuitem;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class MenuItemUpdateRequest {
 
+    @NotBlank
+    @Size(max = 150)
     private String name;
 
     private String description;
 
+    @Positive
+    @NotNull
     private BigDecimal price;
 
     private String imageUrl;
 
-    private boolean veg;
+    @NotNull
+    private Boolean veg;
 
-    private int displayOrder;
+    @NotNull
+    @PositiveOrZero
+    private Integer displayOrder;
 
     public String getName() {
         return name;
@@ -49,19 +61,19 @@ public class MenuItemUpdateRequest {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isVeg() {
+    public Boolean getVeg() {
         return veg;
     }
 
-    public void setVeg(boolean veg) {
+    public void setVeg(Boolean veg) {
         this.veg = veg;
     }
 
-    public int getDisplayOrder() {
+    public Integer getDisplayOrder() {
         return displayOrder;
     }
 
-    public void setDisplayOrder(int displayOrder) {
+    public void setDisplayOrder(Integer displayOrder) {
         this.displayOrder = displayOrder;
     }
 }

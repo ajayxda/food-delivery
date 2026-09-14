@@ -24,31 +24,31 @@ public class MenuCategoryController {
     }
 
     @GetMapping("/{menuCategoryId}")
-    public ResponseEntity<MenuCategoryResponse> getMenuById(@PathVariable  UUID menuCategoryId) {
+    public ResponseEntity<MenuCategoryResponse> getMenuCategoryById(@PathVariable  UUID menuCategoryId) {
         MenuCategoryResponse menuCategoryResponse = menuCategoryService.getMenuCategoryById(menuCategoryId);
         return ResponseEntity.status(HttpStatus.OK).body(menuCategoryResponse);
     }
 
     @GetMapping("/{menuCategoryId}/menu-items")
-    public ResponseEntity<List<MenuItemResponse>> getMenuItemsByCategory(@PathVariable UUID menuCategoryId) {
+    public ResponseEntity<List<MenuItemResponse>> getMenuItemsByMenuCategory(@PathVariable UUID menuCategoryId) {
         List<MenuItemResponse> menuItems = menuCategoryService.getMenuItemsByCategory(menuCategoryId);
         return ResponseEntity.status(HttpStatus.OK).body(menuItems);
     }
 
     @PostMapping
-    public ResponseEntity<MenuCategoryResponse> createMenu(@Valid @RequestBody MenuCategoryCreateRequest request) {
+    public ResponseEntity<MenuCategoryResponse> createMenuCategory(@Valid @RequestBody MenuCategoryCreateRequest request) {
         MenuCategoryResponse menuCategoryResponse = menuCategoryService.createMenuCategory(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(menuCategoryResponse);
     }
 
     @PutMapping("/{menuCategoryId}")
-    public ResponseEntity<MenuCategoryResponse> updateMenu(@PathVariable UUID menuCategoryId,@Valid @RequestBody MenuCategoryUpdateRequest request) {
+    public ResponseEntity<MenuCategoryResponse> updateMenuCategory(@PathVariable UUID menuCategoryId,@Valid @RequestBody MenuCategoryUpdateRequest request) {
         MenuCategoryResponse menuCategoryResponse = menuCategoryService.updateMenuCategory(menuCategoryId, request);
         return ResponseEntity.status(HttpStatus.OK).body(menuCategoryResponse);
     }
 
     @DeleteMapping("/{menuCategoryId}")
-    public ResponseEntity<Void> deleteMenu(@PathVariable UUID menuCategoryId) {
+    public ResponseEntity<Void> deleteMenuCategory(@PathVariable UUID menuCategoryId) {
         menuCategoryService.deleteMenuCategory(menuCategoryId);
         return ResponseEntity.noContent().build();
     }

@@ -14,8 +14,6 @@ import com.aj.Munchio.repository.MenuItemRepository;
 import com.aj.Munchio.repository.MenuRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.ResourceAccessException;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +37,7 @@ public class MenuCategoryService {
 
     @Transactional
     public MenuCategoryResponse createMenuCategory(MenuCategoryCreateRequest request) {
-        Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(()-> new ResourceNotFoundException("Unable to find menu with this id"));
+        Menu menu = menuRepository.findById(request.getMenuId()).orElseThrow(()-> new ResourceNotFoundException("Unable to find menu category with this id"));
         MenuCategory menuCategory = new MenuCategory();
         menuCategory.setName(request.getName());
         menuCategory.setDisplayOrder(request.getDisplayOrder());
@@ -50,7 +48,7 @@ public class MenuCategoryService {
 
     @Transactional(readOnly = true)
     public MenuCategoryResponse getMenuCategoryById(UUID id) {
-        MenuCategory menuCategory = menuCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Unable to find menu with this id"));
+        MenuCategory menuCategory = menuCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Unable to find menu category with this id"));
         return mapper.mapToDto(menuCategory);
     }
 
@@ -67,7 +65,7 @@ public class MenuCategoryService {
 
     @Transactional
     public MenuCategoryResponse updateMenuCategory(UUID id, MenuCategoryUpdateRequest request) {
-        MenuCategory menuCategory = menuCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Unable to find menu with this id"));
+        MenuCategory menuCategory = menuCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Unable to find menu category with this id"));
         menuCategory.setName(request.getName());
         menuCategory.setDisplayOrder(request.getDisplayOrder());
         return mapper.mapToDto(menuCategoryRepository.save(menuCategory));
@@ -76,7 +74,7 @@ public class MenuCategoryService {
     @Transactional
     public void deleteMenuCategory(UUID id) {
         if(!menuCategoryRepository.existsById(id)) {
-            throw new ResourceAccessException("No menu category found for this id");
+            throw new ResourceNotFoundException("No menu category found for this id");
         }
         menuCategoryRepository.deleteById(id);
     }

@@ -1,11 +1,5 @@
 package com.aj.Munchio.dto.menu.menuitem;
 
-import com.aj.Munchio.entity.restaurant.MenuCategory;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;

@@ -1,26 +1,37 @@
 package com.aj.Munchio.dto.menu.menuitem;
 
-import com.aj.Munchio.entity.restaurant.MenuCategory;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 public class MenuItemCreateRequest {
 
+    @NotNull
     private UUID categoryId;
 
+    @NotBlank
+    @Size(max = 150)
     private String name;
 
     private String description;
 
+    @Positive
+    @NotNull
     private BigDecimal price;
 
     private String imageUrl;
 
-    private boolean veg = true;
+    @NotNull
+    private Boolean veg;
 
-    private int displayOrder;
+    @NotNull
+    @PositiveOrZero
+    private Integer displayOrder;
 
     public UUID getCategoryId() {
         return categoryId;
@@ -62,19 +73,19 @@ public class MenuItemCreateRequest {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isVeg() {
+    public Boolean getVeg() {
         return veg;
     }
 
-    public void setVeg(boolean veg) {
+    public void setVeg(Boolean veg) {
         this.veg = veg;
     }
 
-    public int getDisplayOrder() {
+    public Integer getDisplayOrder() {
         return displayOrder;
     }
 
-    public void setDisplayOrder(int displayOrder) {
+    public void setDisplayOrder(Integer displayOrder) {
         this.displayOrder = displayOrder;
     }
 }

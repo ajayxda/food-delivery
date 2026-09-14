@@ -11,8 +11,6 @@ import com.aj.Munchio.repository.MenuCategoryRepository;
 import com.aj.Munchio.repository.MenuItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.awt.*;
 import java.util.UUID;
 
 @Service
@@ -34,12 +32,13 @@ public class MenuItemService {
         MenuItem menuItem = new MenuItem();
         menuItem.setName(menuItemCreateRequest.getName());
         menuItem.setDescription(menuItemCreateRequest.getDescription());
-        menuItem.setVeg(menuItemCreateRequest.isVeg());
+        menuItem.setVeg(menuItemCreateRequest.getVeg());
         menuItem.setPrice(menuItemCreateRequest.getPrice());
         menuItem.setDisplayOrder(menuItemCreateRequest.getDisplayOrder());
         menuItem.setImageUrl(menuItemCreateRequest.getImageUrl());
         menuItem.setCategory(menuCategory);
-        return menuItemMapper.mapToDto(menuItem);
+        MenuItem savedMenuItem = menuItemRepository.save(menuItem);
+        return menuItemMapper.mapToDto(savedMenuItem);
     }
 
     @Transactional
@@ -47,7 +46,7 @@ public class MenuItemService {
         MenuItem menuItem = menuItemRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("menuitem not found with this id"));
         menuItem.setName(menuItemUpdateRequest.getName());
         menuItem.setDescription(menuItemUpdateRequest.getDescription());
-        menuItem.setVeg(menuItemUpdateRequest.isVeg());
+        menuItem.setVeg(menuItemUpdateRequest.getVeg());
         menuItem.setPrice(menuItemUpdateRequest.getPrice());
         menuItem.setDisplayOrder(menuItemUpdateRequest.getDisplayOrder());
         menuItem.setImageUrl(menuItemUpdateRequest.getImageUrl());
@@ -55,6 +54,7 @@ public class MenuItemService {
         return menuItemMapper.mapToDto(savedMenuItem);
     }
 
+    @Transactional(readOnly = true)
     public MenuItemResponse getMenuItemById(UUID menuItemId) {
         MenuItem menuItem = menuItemRepository.findById(menuItemId).orElseThrow(()-> new ResourceNotFoundException("Menu Item not found with this id"));
         return menuItemMapper.mapToDto(menuItem);
@@ -63,7 +63,7 @@ public class MenuItemService {
 
     @Transactional
     public void deleteMenuItem(UUID id) {
-        if(menuItemRepository.existsById(id)) {
+        if(!menuItemRepository.existsById(id)) {
             throw new ResourceNotFoundException("Menu Item not found with this id");
         }
         menuItemRepository.deleteById(id);
