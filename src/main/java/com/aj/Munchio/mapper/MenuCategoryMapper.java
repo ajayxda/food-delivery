@@ -1,8 +1,6 @@
 package com.aj.Munchio.mapper;
 
-import com.aj.Munchio.dto.menu.MenuResponse;
-import com.aj.Munchio.dto.menu.menuCategory.MenuCategoryResponse;
-import com.aj.Munchio.entity.restaurant.Menu;
+import com.aj.Munchio.dto.menu.menucategory.MenuCategoryResponse;
 import com.aj.Munchio.entity.restaurant.MenuCategory;
 import org.springframework.stereotype.Component;
 

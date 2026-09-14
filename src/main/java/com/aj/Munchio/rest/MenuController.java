@@ -3,7 +3,7 @@ package com.aj.Munchio.rest;
 import com.aj.Munchio.dto.menu.MenuCreateRequest;
 import com.aj.Munchio.dto.menu.MenuResponse;
 import com.aj.Munchio.dto.menu.MenuUpdateRequest;
-import com.aj.Munchio.dto.menu.menuCategory.MenuCategoryResponse;
+import com.aj.Munchio.dto.menu.menucategory.MenuCategoryResponse;
 import com.aj.Munchio.service.MenuService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

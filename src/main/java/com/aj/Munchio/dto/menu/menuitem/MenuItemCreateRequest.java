@@ -1,49 +1,33 @@
-package com.aj.Munchio.entity.restaurant;
+package com.aj.Munchio.dto.menu.menuitem;
 
-import com.aj.Munchio.entity.common.BaseEntity;
-import jakarta.persistence.*;
+import com.aj.Munchio.entity.restaurant.MenuCategory;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 
-@Entity
-@Table(name = "menu_items")
-public class MenuItem extends BaseEntity {
+public class MenuItemCreateRequest {
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
-    private MenuCategory category;
+    private UUID categoryId;
 
-    @Column(nullable = false, length = 150)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(name = "is_veg", nullable = false)
     private boolean veg = true;
 
-    @Column(name = "is_available", nullable = false)
-    private boolean available = true;
-
-    @Column(name = "display_order", nullable = false)
     private int displayOrder;
 
-    public MenuItem() {
-
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
-    public MenuCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(MenuCategory category) {
-        this.category = category;
+    public void setCategoryId(UUID categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -84,14 +68,6 @@ public class MenuItem extends BaseEntity {
 
     public void setVeg(boolean veg) {
         this.veg = veg;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
     public int getDisplayOrder() {

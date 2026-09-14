@@ -1,4 +1,4 @@
-package com.aj.Munchio.dto.menu.menuCategory;
+package com.aj.Munchio.dto.menu.menucategory;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
